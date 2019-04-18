@@ -9,6 +9,7 @@ class TodoList extends Component {
         this.handleInput = this.handleInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleDone = this.handleDone.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
     
     handleInput(e) {
@@ -32,18 +33,23 @@ class TodoList extends Component {
         this.props.done(index);
     }
     
+    handleDelete(e) {
+        const index = e.target.parentElement.parentElement.getAttribute('index');
+        this.props.delete(index);
+    }
+    
     render() {
         return (
          <div className="todo-box">
           <ul className="todo-list">
             {this.props.todos.map((todo, i) => {
-                return (<li key={i} index={i}>
+                return (!todo.deleted && (<li key={i} index={i}>
                     <div className="todo">
                         <p>{todo.task}</p>
-                        <button className="btn delete">Delete</button>
+                        <button className="btn delete" onClick={this.handleDelete}>Delete</button>
                         {!todo.completed && <button className="btn done" onClick={this.handleDone}>Done</button>}
                     </div>
-                </li>);
+                </li>));
             })}
           </ul>
           <form onSubmit={this.handleSubmit}>
