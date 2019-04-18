@@ -1,9 +1,17 @@
-import {ADD_TODO} from './action-type';
+import {ADD_TODO, DONE} from './action-type';
 
 const rootReducer = (state=[], action) => {
     switch (action.type) {
         case ADD_TODO:
-            return [...state, action.todo];
+            const todo = {
+                completed: false,
+                task: action.todo
+            }
+            return [...state, todo];
+        case DONE:
+            const newState = state.slice();
+            newState[action.index].completed= true;
+            return newState;
         default:
             return state;
     }
