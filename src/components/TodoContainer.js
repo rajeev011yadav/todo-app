@@ -1,14 +1,19 @@
 import React, {Component} from 'react';
 import {addTodo, done, remove_todo} from '../store/action-creator';
 import {connect} from 'react-redux';
-import TodoList from './todo-list'
+import TodoList from './TodoList'
 
 class TodosContainer extends Component {
 
     render() {
+
         return (
-             <TodoList todos={this.props.todos} addTodo={this.props.addTodo} done={this.props.done} delete={this.props.remove_todo}/>
-            );
+                <TodoList 
+                    todos={this.props.todos} 
+                    addTodo={this.props.addTodo} 
+                    done={this.props.done} 
+                    delete={this.props.remove_todo}/>
+        );
     }
 }
 

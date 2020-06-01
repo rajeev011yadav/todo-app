@@ -1,6 +1,6 @@
 import {ADD_TODO, DONE, DELETE} from './action-type';
 
-const rootReducer = (state=[], action) => {
+const rootReducer = (state=[{completed: false, deleted: false, task: "feed the dog."}], action) => {
     switch (action.type) {
         case ADD_TODO:
             const todo = {
