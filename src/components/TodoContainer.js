@@ -18,7 +18,7 @@ class TodosContainer extends Component {
 }
 
 const matchPropToState = (store) => {
-    return {todos: store};
+    return {todos: store.todos};
 }
 
 const matchDispathToState = (dispatch) => {

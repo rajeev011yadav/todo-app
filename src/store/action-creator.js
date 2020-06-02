@@ -1,4 +1,4 @@
-import {ADD_TODO, DONE, DELETE} from './action-type';
+import {ADD_TODO, DONE, DELETE, SIGNUP, LOGOUT, LOGIN} from './action-type';
 
 export const addTodo = todo => {
     return {
@@ -20,3 +20,18 @@ export const remove_todo = index => {
         index
     };
 };
+
+export const signUp = user => {
+    return {
+        type: SIGNUP,
+        user,
+    };
+};
+
+export const logOut = () => {
+    return {type: LOGOUT}
+}
+
+export const logIn = ({email, password}) => {
+    return {type: LOGIN, email, password};
+}

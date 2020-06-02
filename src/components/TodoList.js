@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Todo from './Todo';
+import TodoAddForm from './TodoAddForm';
 
 class TodoList extends Component {
     constructor(props) {
@@ -35,28 +36,29 @@ class TodoList extends Component {
     handleDelete(index) {
         this.props.delete(index);
     }
+
+    todosList() {
+        const todos = this.props.todos.filter((todo) => todo.deleted===false)
+        .map((todo, i) => (
+                <Todo todo={todo} key={todo.id}
+                      id={i}
+                      handleDelete={() => this.handleDelete(todo.id)}
+                      handleDone={() => this.handleDone(todo.id)}
+                />
+            ));
+        return todos.length === 0 ? <div className="test-muted text-center">No Todo</div> : todos;
+    }
     
     render() {
         return (
             <div className="card mx-auto mt-5 todo-list" style={{"width": 400}}>
                 <div  className="card-body">
                     <ul className="list-group">
-                        {this.props.todos.map((todo, i) => {
-                            return (!todo.deleted && 
-                                    <Todo todo={todo} key={i}
-                                           id={i}
-                                           handleDelete={() => this.handleDelete(i)}
-                                           handleDone={() => this.handleDone(i)}
-                                    />
-                            );
-                        })}
+                        {this.todosList()}
                     </ul>
                 </div>
             <div className="card-footer">
-                <form className="form-inline" onSubmit={this.handleSubmit}>
-                    <input className="form-control flex-grow-1"type="text" value={this.state.input} name="newTodo" onChange={this.handleInput} autoComplete="off"/>
-                    <button type="submit" className={"btn btn-primary"}>Add todo</button>
-                </form>
+                <TodoAddForm todo={this.state.input} handleInput={this.handleInput} handleSubmit={this.handleSubmit}/>
             </div>
           </div>
         );
